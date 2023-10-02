@@ -1,0 +1,10 @@
+.chatwindowContainer {
+  display: flex;
+
+  backdrop-filter: blur(15px);
+  backdrop-filter: brightness(20%);
+  background-color: rgba(18, 55, 134, 0.445);
+  border-bottom-right-radius: 5px;
+  flex-direction: column;
+  overflow: hidden;
+}

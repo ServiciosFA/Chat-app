@@ -1,0 +1,36 @@
+@mixin mobile {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin latop {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
+.chatpanelContainer {
+  display: grid;
+  grid-template-columns: minmax(15rem, 21rem) minmax(30rem, 50rem);
+  grid-template-rows: 5rem 30rem;
+  align-content: center;
+  box-shadow: rgba(51, 51, 51, 0.527) 0px 2px 8px 0px;
+  position: relative;
+  @include latop {
+    grid-template-columns: minmax(8rem, 14rem) minmax(15rem, 22rem);
+    grid-template-rows: 4rem minmax(24rem, 27rem);
+  }
+  @include tablet {
+    grid-template-columns: minmax(6rem, 8rem) minmax(7rem, 18rem);
+    grid-template-rows: 4rem minmax(22rem, 25rem);
+  }
+  @include mobile {
+    grid-template-columns: minmax(3rem, 5rem) minmax(5rem, 10rem);
+    grid-template-rows: 4rem minmax(20rem, 23rem);
+  }
+}

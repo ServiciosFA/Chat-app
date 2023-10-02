@@ -1,0 +1,37 @@
+@mixin mobile {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin latop {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 650px;
+  @include latop {
+    width: 1200px;
+    height: 630px;
+  }
+  @include tablet {
+    width: 768px;
+    height: 518px;
+  }
+  @include mobile {
+    width: 480px;
+    height: 413px;
+  }
+}
+.mainContainer {
+}

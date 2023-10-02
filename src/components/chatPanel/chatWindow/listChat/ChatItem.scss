@@ -1,0 +1,22 @@
+.chatContact {
+  display: flex;
+  word-wrap: break-word;
+  flex-direction: row;
+  align-self: flex-start;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  width: 40%;
+  .fondoContact {
+    background-color: whitesmoke;
+    color: black;
+    padding: 0.5rem;
+    border-radius: 0px 10px 10px 10px;
+    max-width: 100%;
+    .imagenChat {
+      padding: 0.3rem;
+      width: 50%;
+      height: 50%;
+    }
+  }
+}

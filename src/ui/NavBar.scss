@@ -1,0 +1,73 @@
+.navContainer {
+  display: flex;
+  height: 3rem;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(17, 76, 143);
+  color: white;
+  .logoContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    .imageLogo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: contain;
+      border: none;
+    }
+  }
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgb(223, 220, 220);
+  }
+  .linkContainer {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    span {
+      font-size: medium;
+      font-weight: 600;
+    }
+    .optionBar {
+      background-color: rgb(2, 50, 105);
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      transform: translate(65%, 91%);
+      padding: 0.2rem;
+      border-radius: 3px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      z-index: 100;
+    }
+    .optionLink {
+      border-radius: 3px;
+      &:hover {
+        background-color: aliceblue;
+        color: rgb(96, 122, 206);
+      }
+    }
+    .optionButton {
+      border-radius: 5px;
+
+      &:hover {
+        cursor: pointer;
+        background-color: aliceblue;
+        color: rgb(96, 122, 206);
+      }
+    }
+    .link {
+      &:hover {
+        color: rgb(152, 175, 250);
+      }
+    }
+  }
+}

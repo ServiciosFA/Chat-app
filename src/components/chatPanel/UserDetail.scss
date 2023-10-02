@@ -1,0 +1,57 @@
+@mixin mobile {
+  @media screen and (max-width: 480px) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin latop {
+  @media screen and (max-width: 1200px) {
+    @content;
+  }
+}
+
+.userContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(88, 116, 206);
+  color: white;
+  border-top-left-radius: 5px;
+  padding: 0.3rem;
+
+  .usrDescription {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px;
+    padding: 0.3rem;
+    .imageUsr {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgb(223, 220, 220);
+    }
+    button {
+      background-color: rgb(152, 175, 250);
+      padding: 0.3rem;
+      color: white;
+      border-radius: 3px;
+      border: none;
+      @include latop {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background-color: rgb(51, 44, 117);
+      }
+    }
+    button:hover {
+      background-color: rgb(110, 140, 236);
+      cursor: pointer;
+    }
+  }
+}
