@@ -72,6 +72,7 @@ const MessageWindow = () => {
           setMessage("");
         }
       );
+      setImg(null);
     } else {
       //Agrega el mensaje a la refencia del chat
       await updateDoc(chatDocRef, {
