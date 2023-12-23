@@ -11,10 +11,12 @@ import {
 import { db } from "../../../../firebase";
 import { chatActions } from "../../../../store/chatSlice";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import CardUser from "../../../../ui/CardUser";
 
 const FindedUser = ({ user, refreshHandler, onSeterror }) => {
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.auth);
+
   //Select Chat Actions
   const selectHandler = async () => {
     //Id unico fucionando los id de los dos usuarios en la charla
@@ -51,6 +53,7 @@ const FindedUser = ({ user, refreshHandler, onSeterror }) => {
         });
       }
       dispatch(chatActions.CHANGE_USER({ user, chatId: combinedId }));
+      refreshHandler();
     } catch (err) {
       onSeterror(true);
       console.error(err);
@@ -59,10 +62,11 @@ const FindedUser = ({ user, refreshHandler, onSeterror }) => {
 
   return (
     <div className="searchLayout">
-      <div className="searchUser" onClick={selectHandler}>
-        <img src={user.photoURL} alt=""></img>
-        <span>{user.displayName}</span>
-      </div>
+      <CardUser
+        imgUrl={user.photoURL}
+        name={user.displayName}
+        onClick={selectHandler}
+      ></CardUser>
       <HighlightOffIcon
         className="closeButton"
         onClick={refreshHandler}

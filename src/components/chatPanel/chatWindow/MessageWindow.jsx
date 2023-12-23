@@ -16,13 +16,18 @@ import {
   ref as refe,
   uploadBytesResumable,
 } from "firebase/storage";
+import Button from "../../../ui/Button";
+import InputFile from "../../../ui/InputFile";
+import Spinner from "../../../ui/Spinner";
 
 const MessageWindow = () => {
   const currentUser = useSelector((state) => state.auth);
   const userChat = useSelector((state) => state.chat);
+  const [isLoading, setIsloading] = useState(false);
 
   const [message, setMessage] = useState("");
   const [img, setImg] = useState(null);
+  const [imgUrl, setImgurl] = useState(null);
 
   //Apretar enter y permitir bajar de linea (shift+enter)
   const handleKeyDown = (event) => {
@@ -35,7 +40,7 @@ const MessageWindow = () => {
   //Guardar mensaje en db y si hay imagen en store
   const textHandler = async (e) => {
     if (e) e.preventDefault();
-
+    setIsloading(true);
     //Referencia al chat por Id
     const chatDocRef = doc(db, "chats", userChat.chatId);
     //Referencia a chat del currentUser
@@ -52,8 +57,10 @@ const MessageWindow = () => {
         "state_changed",
         (snapshot) => {
           // Escucha el progreso de la carga de la imagen
+          setIsloading(true);
         },
         (error) => {
+          setIsloading(false);
           // Maneja los errores de la carga de la imagen
         },
         () => {
@@ -70,8 +77,12 @@ const MessageWindow = () => {
             });
           });
           setMessage("");
+          setIsloading(false);
         }
       );
+      setIsloading(false);
+      setImg(null);
+      setImgurl(null);
     } else {
       //Agrega el mensaje a la refencia del chat
       await updateDoc(chatDocRef, {
@@ -93,32 +104,61 @@ const MessageWindow = () => {
         [userChat.chatId + ".date"]: serverTimestamp(),
       });
       setMessage("");
+      setIsloading(false);
+    }
+  };
+
+  const fileHandler = (event) => {
+    setImg(event.target.files[0]);
+    const archivo = event.target.files[0];
+    if (archivo) {
+      const lector = new FileReader();
+      lector.onloadend = () => {
+        setImgurl(lector.result);
+      };
+      lector.readAsDataURL(archivo);
     }
   };
 
   return (
     <form className="actionChat" onSubmit={textHandler}>
-      <div className="inputContainer">
-        <textarea
-          placeholder="Type something"
-          onChange={(e) => setMessage(e.target.value)}
-          value={message}
-          onKeyDown={handleKeyDown}
-          disabled={!userChat?.chatId}
-        ></textarea>
-      </div>
+      {isLoading ? (
+        <div className="inputContainer">
+          <Spinner type="spinner small"></Spinner>
+        </div>
+      ) : (
+        <div className="inputContainer">
+          <textarea
+            placeholder="Type something"
+            onChange={(e) => setMessage(e.target.value)}
+            value={message}
+            onKeyDown={handleKeyDown}
+            disabled={!userChat?.chatId || isLoading}
+            className="textChat"
+          ></textarea>
+          {img ? (
+            <div className="imageMessageContainer">
+              <img src={imgUrl} alt="img" className="imageText"></img>
+              <p className="imageDescription">{img.name}</p>
+            </div>
+          ) : (
+            <InputFile
+              id="file"
+              name="imageFile"
+              disabled={!userChat?.chatId}
+              fileHandler={fileHandler || isLoading}
+            ></InputFile>
+          )}
+        </div>
+      )}
       <div className="actionButtons">
-        <input
-          type="file"
-          style={{ display: "none" }}
-          id="file"
-          onChange={(e) => setImg(e.target.files[0])}
-          disabled={!userChat?.chatId}
-        />
-        <label htmlFor="file">
-          <ImageIcon className="icon" disabled={!userChat?.chatId}></ImageIcon>
-        </label>
-        <button disabled={!userChat?.chatId}>Send</button>
+        <ImageIcon
+          className="icon"
+          disabled={!userChat?.chatId || isLoading}
+        ></ImageIcon>
+        <Button disabled={!userChat?.chatId || isLoading}>
+          {isLoading ? "Loading..." : "Send"}
+        </Button>
       </div>
     </form>
   );

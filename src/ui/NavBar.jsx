@@ -14,14 +14,21 @@ import { auth } from "../firebase";
 import { notifActions } from "../store/notifSlice";
 import { chatActions } from "../store/chatSlice";
 import logo from "../assets/logo.jpg";
+import CardUser from "./CardUser";
+import DropdownMenu from "./DropdownMenu";
+import Logo from "./Logo";
 
 const NavBar = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const imgUrl = useSelector(selectImgUrl);
-  const userName = useSelector(selectuserName);
   const [showOption, setShowoption] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const imgUrl = useSelector(selectImgUrl);
+  const userName = useSelector(selectuserName);
+
+  const barHandler = () => {
+    setShowoption((showOption) => !showOption);
+  };
 
   const logoutHandler = () => {
     //Metodo Firebase para desloguear usuario
@@ -49,48 +56,34 @@ const NavBar = () => {
       });
   };
 
-  const barHandler = () => {
-    setShowoption((showOption) => !showOption);
-  };
-
   return (
     <div className="navContainer">
-      <Link to="/" className="logoContainer">
-        <img className="imageLogo" src={logo} alt=""></img>
-        <h3>FA Chat</h3>
-      </Link>
-      <div>
-        {!isLoggedIn ? (
-          <div className="linkContainer">
-            <Link to="/login" className="link">
-              Login
-            </Link>
-            <Link to="/signin" className="link">
-              Register
-            </Link>
-          </div>
-        ) : (
-          <div className="linkContainer">
-            <img src={imgUrl} alt=""></img>
-            <span>{userName.charAt(0).toUpperCase() + userName.slice(1)}</span>
-            <KeyboardArrowDownIcon
-              className="optionButton"
-              onClick={barHandler}
-              onMouseEnter={barHandler}
-            ></KeyboardArrowDownIcon>
-            {showOption && (
-              <ul className="optionBar" onMouseLeave={barHandler}>
-                <Link onClick={barHandler} className="optionLink" to="/chat">
-                  <li>Chat</li>
-                </Link>
-                <li className="optionLink" onClick={logoutHandler}>
-                  Logout
-                </li>
-              </ul>
-            )}
-          </div>
-        )}
-      </div>
+      <Logo logo={logo} title={"FA Chat"}></Logo>
+      {!isLoggedIn ? (
+        <div className="linkContainer">
+          <Link to="/login" className="link">
+            Login
+          </Link>
+          <Link to="/signin" className="link">
+            Register
+          </Link>
+        </div>
+      ) : (
+        <div className="linkContainer">
+          <CardUser imgUrl={imgUrl} name={userName}></CardUser>
+          <KeyboardArrowDownIcon
+            className="optionButton"
+            onClick={barHandler}
+            onMouseEnter={barHandler}
+          ></KeyboardArrowDownIcon>
+          {showOption && (
+            <DropdownMenu
+              barHandler={barHandler}
+              logoutHandler={logoutHandler}
+            ></DropdownMenu>
+          )}
+        </div>
+      )}
     </div>
   );
 };

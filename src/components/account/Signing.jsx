@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Signing.scss";
 import PhotoSizeSelectActualOutlinedIcon from "@mui/icons-material/PhotoSizeSelectActualOutlined";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth, storage } from "../../firebase";
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -10,15 +10,18 @@ import { db } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { notifActions } from "../../store/notifSlice";
 import useForm from "../../hooks/useForm";
-import InputField from "../../ui/inputField";
+import InputField from "../../ui/InputField";
+import FormCard from "../../ui/FormCard";
+import InputFile from "../../ui/InputFile";
 
 const greaterThanFive = (value) => value && value.trim().length > 5;
 const isEmail = (value) => value && value.includes("@");
 
 const Signing = () => {
   const navigate = useNavigate();
-  const [file, setFile] = useState([]);
+  const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [imgUrl, setImgurl] = useState(null);
 
   const dispatch = useDispatch();
 
@@ -47,6 +50,8 @@ const Signing = () => {
     reset: resetPassword,
   } = useForm(greaterThanFive);
 
+  const inputsValid = passwordIsValid && emailIsValid && nameIsValid;
+
   //Sign account
   const signinHandler = async (e) => {
     e.preventDefault();
@@ -67,7 +72,7 @@ const Signing = () => {
         //Subir archivo a la referencia del storage
         const uploadTask = await uploadBytesResumable(storageRef, file);
 
-        //obtener url de imagen de ña referencia
+        //obtener url de imagen de la referencia
         const downloadURL = await getDownloadURL(uploadTask.ref);
 
         //actualizar user profile
@@ -111,68 +116,69 @@ const Signing = () => {
 
   const fileHandler = (event) => {
     setFile(event.target.files[0]);
+    const archivo = event.target.files[0];
+    if (archivo) {
+      const lector = new FileReader();
+      lector.onloadend = () => {
+        setImgurl(lector.result);
+      };
+      lector.readAsDataURL(archivo);
+    }
   };
 
   return (
-    <div className="accountPanelContainer">
-      <form className="signinMain" onSubmit={signinHandler}>
-        <div className="signinContainer">
-          <h3>Register</h3>
-          <InputField
-            type="text"
-            hasError={nameHasError}
-            placeholder="Display Name"
-            value={name}
-            onChange={nameChangeHandler}
-            onBlur={nameBlurHandler}
-            errorMessage={"More than 5 characters"}
-            required
-          ></InputField>
-          <InputField
-            type="mail"
-            value={email}
-            placeholder="Email"
-            onChange={emailChangeHandler}
-            onBlur={emailBlurHandler}
-            hasError={emailHasError}
-            errorMessage={"It must include @"}
-            required
-          ></InputField>
-          <InputField
-            hasError={passwordHasError}
-            type="password"
-            placeholder="Pass"
-            value={password}
-            onChange={passwordChangeHandler}
-            onBlur={passwordBlurHandler}
-            errorMessage={"More than 5 characters"}
-            required
-          ></InputField>
-          <input
-            style={{ display: "none" }}
-            className="input"
-            type="file"
-            id="file"
-            name="avatar"
-            placeholder="avatar"
-            onChange={fileHandler}
-          ></input>
-          <label htmlFor="file" className="label">
-            <PhotoSizeSelectActualOutlinedIcon></PhotoSizeSelectActualOutlinedIcon>
-            Add an avatar
-          </label>
-          <button disabled={loading}>
-            {loading ? "Loading..." : "Sign in"}
-          </button>
-        </div>
-      </form>
-      <p>
-        You do have an account?{" "}
-        <Link to="/login">
-          <span>Login</span>
-        </Link>
-      </p>
-    </div>
+    <FormCard
+      submitHandler={signinHandler}
+      title={"Sign in"}
+      needAccount={"Do you already have an account?"}
+      span={"Login"}
+      loading={loading}
+      inputsValid={inputsValid}
+      to={"/login"}
+    >
+      <InputField
+        id="name"
+        type="text"
+        hasError={nameHasError}
+        label="Display Name"
+        placeholder="Display Name"
+        value={name}
+        onChange={nameChangeHandler}
+        onBlur={nameBlurHandler}
+        errorMessage={"More than 5 characters"}
+        required
+      ></InputField>
+      <InputField
+        id="email"
+        type="mail"
+        value={email}
+        label="Email"
+        placeholder="Email"
+        onChange={emailChangeHandler}
+        onBlur={emailBlurHandler}
+        hasError={emailHasError}
+        errorMessage={"It must include @"}
+        required
+      ></InputField>
+      <InputField
+        id="pass"
+        hasError={passwordHasError}
+        type="password"
+        label="Password"
+        placeholder="Password"
+        value={password}
+        onChange={passwordChangeHandler}
+        onBlur={passwordBlurHandler}
+        errorMessage={"More than 5 characters"}
+        required
+      ></InputField>
+      <div className="imageLayout">
+        <InputFile name="avatar" id="file" fileHandler={fileHandler}>
+          <PhotoSizeSelectActualOutlinedIcon></PhotoSizeSelectActualOutlinedIcon>
+          <span>{!file ? "Add Avatar" : `Name: ${file.name}`}</span>
+        </InputFile>
+      </div>
+    </FormCard>
   );
 };
 

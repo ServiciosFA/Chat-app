@@ -1,8 +1,8 @@
 import React from "react";
 import "./ChatPanel.scss";
-import UserDetail from "./UserDetail";
+import UserDetail from "./userDetail/UserDetail";
 import ActionsChat from "./actionsChat/ActionsChat";
-import ChatActual from "./chatWindow/ChatWindow";
+import Chat from "./chatWindow/Chat";
 import UserChats from "./userChats/UserChats";
 
 const ChatPanel = () => {
@@ -11,7 +11,7 @@ const ChatPanel = () => {
       <UserDetail></UserDetail>
       <ActionsChat></ActionsChat>
       <UserChats></UserChats>
-      <ChatActual></ChatActual>
+      <Chat></Chat>
     </div>
   );
 };

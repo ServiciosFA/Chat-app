@@ -1,0 +1,31 @@
+@import "../styles/mixins.scss";
+$main-background-color: rgb(255, 253, 253);
+$main-color-hover: #01b5e8;
+$main-color: #0539af;
+$font-size-small: 1.3rem;
+$font-size-normal: 1.6rem;
+$font-size-big: 2rem;
+
+.buttonContainer {
+  color: $main-background-color;
+  background-color: $main-color;
+  padding: 0.4rem;
+  border-radius: 3px;
+  font-size: $font-size-normal;
+  font-weight: 500;
+  border: none;
+  @include desktop {
+  }
+  @include laptop {
+    font-size: $font-size-small;
+  }
+  @include tablet {
+    font-size: $font-size-small;
+  }
+  @include mobile {
+    font-size: $font-size-small;
+  }
+  &:hover {
+    background-color: $main-color-hover;
+  }
+}

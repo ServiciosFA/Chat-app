@@ -1,6 +1,6 @@
 @import "../../../styles/mixins.scss";
 
-$main-background-color: #0539af;
+$main-backgorund-color: #0539af;
 $main-color-hover: #01b5e8;
 $main-font-color: rgb(255, 253, 253);
 $main-placeholder-color: rgb(190, 187, 187);
@@ -8,23 +8,23 @@ $font-size-small: 1.2rem;
 $font-size-normal: 1.8rem;
 $font-size-big: 2.2rem;
 
-.chatactionsContainer {
+.userContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  background: linear-gradient($main-background-color, $main-color-hover);
-  color: $main-font-color;
-  border-top-right-radius: 5px;
   font-size: $font-size-normal;
+  background: linear-gradient($main-backgorund-color, $main-color-hover);
+  color: $main-font-color;
+  border-top-left-radius: 5px;
   padding: 0.3rem;
   @include desktop {
   }
   @include laptop {
   }
   @include tablet {
-    order: 2;
+    display: none;
   }
   @include mobile {
-    order: 2;
+    display: none;
   }
 }

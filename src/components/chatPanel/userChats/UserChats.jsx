@@ -7,7 +7,7 @@ const UserChats = () => {
   return (
     <div className="contactsContainer">
       <ContactSearcher></ContactSearcher>
-      <hr></hr>
+      <hr className="lineUserslist"></hr>
       <ChatList></ChatList>
     </div>
   );

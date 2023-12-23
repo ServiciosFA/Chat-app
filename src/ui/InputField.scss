@@ -1,0 +1,64 @@
+@import "../styles/mixins.scss";
+$main-backgorund-color: #0539af;
+$main-color-hover: #01b5e8;
+$main-font-color: rgb(255, 253, 253);
+$main-placeholder-color: rgb(190, 187, 187);
+$font-size-smaller: 1rem;
+$font-size-small: 1.2rem;
+$font-size-normal: 1.5rem;
+$font-size-big: 2.2rem;
+$input-color-error: #f82331;
+$input-background-color-error: #f8babe;
+.inputContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  width: 100%;
+}
+.label {
+  font-size: $font-size-normal;
+  font-weight: 500;
+  @include desktop {
+  }
+  @include laptop {
+    font-size: $font-size-small;
+  }
+  @include tablet {
+    font-size: $font-size-small;
+  }
+  @include mobile {
+    font-size: $font-size-smaller;
+  }
+}
+.input {
+  border-style: none;
+  border-radius: 3px;
+  padding: 0.4rem;
+  background-color: $main-backgorund-color;
+  color: $main-font-color;
+  outline-style: none;
+  &::placeholder {
+    color: $main-placeholder-color;
+  }
+  @include desktop {
+  }
+  @include laptop {
+    font-size: $font-size-small;
+  }
+  @include tablet {
+    font-size: $font-size-small;
+  }
+  @include mobile {
+    font-size: $font-size-smaller;
+  }
+}
+.input.error {
+  background-color: $input-color-error;
+}
+.label.error {
+  font-size: $font-size-smaller;
+  color: $input-color-error;
+  background-color: $input-background-color-error;
+  text-align: center;
+}

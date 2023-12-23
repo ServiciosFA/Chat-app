@@ -3,11 +3,12 @@ import "./Login.scss";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import { notifActions } from "../../store/notifSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/authSlice";
 import { useDispatch } from "react-redux";
 import useForm from "../../hooks/useForm";
-import InputField from "../../ui/inputField";
+import InputField from "../../ui/InputField";
+import FormCard from "../../ui/FormCard";
 
 const greaterThanFive = (value) => value && value.trim().length > 5;
 const isEmail = (value) => value && value.includes("@");
@@ -33,15 +34,15 @@ const Login = (props) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
+
   const inputsValid = passwordIsValid && emailIsValid;
 
   const loginHandler = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      setLoading(true);
       //metodo de firebase para logear un usr con nuestras input
       signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -51,7 +52,7 @@ const Login = (props) => {
           dispatch(authActions.SET_ACTIVE_USER(user));
           dispatch(
             notifActions.ACTIVE_NOTIFICATION({
-              message: "Login success!!",
+              message: "Login success",
               type: "success",
             })
           );
@@ -72,42 +73,40 @@ const Login = (props) => {
   };
 
   return (
-    <div className="accountPanelContainer">
-      <form className="loginMain" onSubmit={loginHandler}>
-        <div className="loginContainer">
-          <h3>Login</h3>
-          <InputField
-            type="mail"
-            value={email}
-            placeholder="Email"
-            onChange={emailChangeHandler}
-            onBlur={emailBlurHandler}
-            hasError={emailHasError}
-            errorMessage={"It must include @"}
-            required
-          ></InputField>
-          <InputField
-            hasError={passwordHasError}
-            type="password"
-            placeholder="Pass"
-            value={password}
-            onChange={passwordChangeHandler}
-            onBlur={passwordBlurHandler}
-            errorMessage={"More than 5 characters"}
-            required
-          ></InputField>
-          <button disabled={loading || !inputsValid}>
-            {loading ? "Loading..." : "Login"}
-          </button>
-        </div>
-      </form>
-      <p>
-        You don't have an account?{" "}
-        <Link to="/signin">
-          <span>Register</span>
-        </Link>
-      </p>
-    </div>
+    <FormCard
+      submitHandler={loginHandler}
+      title={"Login"}
+      needAccount={"You don't have an account?"}
+      span={"Register"}
+      loading={loading}
+      inputsValid={inputsValid}
+      to={"/signin"}
+    >
+      <InputField
+        id="email"
+        type="mail"
+        value={email}
+        label="Email"
+        placeholder="Email"
+        onChange={emailChangeHandler}
+        onBlur={emailBlurHandler}
+        hasError={emailHasError}
+        errorMessage={"It must include @"}
+        required
+      ></InputField>
+      <InputField
+        id="pass"
+        hasError={passwordHasError}
+        type="password"
+        label="Password"
+        placeholder="Password"
+        value={password}
+        onChange={passwordChangeHandler}
+        onBlur={passwordBlurHandler}
+        errorMessage={"More than 5 characters"}
+        required
+      ></InputField>
+    </FormCard>
   );
 };
 

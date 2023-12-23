@@ -1,37 +1,16 @@
-@mixin mobile {
-  @media screen and (max-width: 480px) {
-    @content;
-  }
-}
-@mixin tablet {
-  @media screen and (max-width: 768px) {
-    @content;
-  }
-}
-@mixin latop {
-  @media screen and (max-width: 1200px) {
-    @content;
-  }
-}
-
+$main-background-color: #0539af;
+$main-color-hover: #01b5e8;
+$main-color: rgb(243, 241, 241);
+$font-size-normal: 1.8rem;
+$font-size-small: 1.6rem;
+$font-size-big: 2rem;
+@import "./styles/mixins.scss";
 .layout {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 650px;
-  @include latop {
-    width: 1200px;
-    height: 630px;
-  }
-  @include tablet {
-    width: 768px;
-    height: 518px;
-  }
-  @include mobile {
-    width: 480px;
-    height: 413px;
-  }
-}
-.mainContainer {
+  height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.479);
 }

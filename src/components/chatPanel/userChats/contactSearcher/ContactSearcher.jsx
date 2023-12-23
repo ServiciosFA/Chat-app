@@ -6,6 +6,8 @@ import "./ContactSearcher.scss";
 import SearchIcon from "@mui/icons-material/Search";
 import FindReplaceIcon from "@mui/icons-material/FindReplace";
 import FindedUser from "./FindedUser";
+import Spinner from "../../../../ui/Spinner";
+import InputField from "../../../../ui/InputField";
 
 const ContactSearcher = () => {
   const [user, setUser] = useState(null);
@@ -47,25 +49,20 @@ const ContactSearcher = () => {
     setUser(null);
     setUserName(null);
   };
+  if (loadingSearch) return <Spinner type={"spinner small"}></Spinner>;
 
   return (
     <div className="searchContainer">
       <div className="searcherInput">
-        <input
+        <InputField
           type="text"
-          placeholder="Find a contact"
-          onChange={(e) => setUserName(e.target.value)}
+          placeholder="Find contact"
           onKeyDown={handlerKey}
+          onChange={(e) => setUserName(e.target.value)}
           id="searcher"
-        ></input>
-        <button onClick={searchHandler}>
-          {loadingSearch ? (
-            <FindReplaceIcon></FindReplaceIcon>
-          ) : (
-            <SearchIcon></SearchIcon>
-          )}
-        </button>
+        ></InputField>
       </div>
+
       {user && !error && (
         <FindedUser
           user={user}

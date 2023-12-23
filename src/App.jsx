@@ -27,31 +27,29 @@ function App() {
   return (
     <Router>
       <Notification></Notification>
-      <div className="mainContainer">
-        <NavBar></NavBar>
-        <div className="layout">
-          <Routes>
-            <Route path="/"></Route>
-            <Route
-              index
-              element={
-                <ProtectedRoute>
-                  <Home></Home>
-                </ProtectedRoute>
-              }
-            ></Route>
-            <Route path="/signin" element={<Signin></Signin>}></Route>
-            <Route path="/login" element={<Login></Login>}></Route>
-            <Route
-              path="/chat"
-              element={
-                <ProtectedRoute>
-                  <Chat></Chat>
-                </ProtectedRoute>
-              }
-            ></Route>
-          </Routes>
-        </div>
+      <NavBar></NavBar>
+      <div className="layout">
+        <Routes>
+          <Route path="/"></Route>
+          <Route
+            index
+            element={
+              <ProtectedRoute>
+                <Home></Home>
+              </ProtectedRoute>
+            }
+          ></Route>
+          <Route path="/signin" element={<Signin></Signin>}></Route>
+          <Route path="/login" element={<Login></Login>}></Route>
+          <Route
+            path="/chat"
+            element={
+              <ProtectedRoute>
+                <Chat></Chat>
+              </ProtectedRoute>
+            }
+          ></Route>
+        </Routes>
       </div>
     </Router>
   );

@@ -4,6 +4,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import "./ListChat.scss";
 import ChatItem from "./ChatItem";
+import Spinner from "../../../../ui/Spinner";
 
 const ListChat = () => {
   const [chat, setChat] = useState([]);
@@ -40,11 +41,11 @@ const ListChat = () => {
   }, [userChat.chatId]);
 
   return (
-    <div className="listChat">
+    <div className="listchatContainer">
       {loading ? (
-        <p className="loadingChat">Loading...</p>
+        <Spinner></Spinner>
       ) : (
-        <ul>
+        <ul className="listChat">
           {chat?.length > 0 &&
             chat.map((e, i) => (
               <ChatItem

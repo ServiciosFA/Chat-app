@@ -1,0 +1,32 @@
+$spinner-size: 50px;
+$spinner-color: #3498db;
+$spinner-speed: 1s;
+
+.spinner {
+  animation: spin $spinner-speed linear infinite;
+}
+.spinner.normal {
+  margin: 50px auto;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid $spinner-color;
+  width: $spinner-size;
+  height: $spinner-size;
+}
+.spinner.small {
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  border-top: 4px solid $spinner-color;
+  width: 30px;
+  height: 30px;
+  margin: 10px auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

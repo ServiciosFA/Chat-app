@@ -1,0 +1,70 @@
+@import "../styles/mixins.scss";
+$main-background-color: #0539af;
+$main-color-hover: #08080870;
+$main-color: rgb(255, 253, 253);
+$font-size-normal: 1.8rem;
+$font-size-small: 1.5rem;
+
+.usrDescription {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.3rem;
+  font-size: $font-size-normal;
+  font-weight: 500;
+  color: $main-color;
+  max-width: 100%;
+
+  @include desktop {
+  }
+  @include laptop {
+  }
+  @include tablet {
+    font-size: $font-size-normal;
+  }
+  @include mobile {
+    font-size: $font-size-small;
+  }
+
+  .userInfo {
+    width: 30rem; /* Set a fixed width for the userInfo div */
+    max-width: 100%;
+    background-color: red;
+    @include desktop {
+      width: 30rem;
+    }
+    @include laptop {
+      width: 22rem;
+    }
+    @include tablet {
+      width: 20rem;
+    }
+    @include mobile {
+      width: 20rem;
+    }
+  }
+  .imageUsr {
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid $main-color;
+
+    @include desktop {
+      width: 50px;
+      height: 50px;
+    }
+    @include laptop {
+      width: 40px;
+      height: 40px;
+    }
+    @include tablet {
+      width: 40px;
+      height: 40px;
+    }
+
+    @include mobile {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}

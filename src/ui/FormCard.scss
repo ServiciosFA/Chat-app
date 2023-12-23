@@ -1,0 +1,122 @@
+$main-background-color: #0539af;
+$main-background-color-2: rgba(5, 56, 175, 0.616);
+$main-color-hover: #01b5e8;
+$main-color: rgb(243, 241, 241);
+$font-size-normal: 1.8rem;
+$font-size-small: 1.6rem;
+$font-size-smaller: 1.4rem;
+$font-size-big: 2rem;
+@import "../styles/mixins.scss";
+
+.accountPanelContainer {
+  justify-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 10px;
+  color: $main-color;
+  background-color: $main-background-color-2;
+
+  font-size: $font-size-normal;
+  width: 100%;
+  height: 100%;
+
+  @include desktop {
+    background-color: $main-background-color-2;
+  }
+  @include laptop {
+  }
+  @include tablet {
+    font-size: $font-size-small;
+  }
+  @include mobile {
+    font-size: $font-size-small;
+  }
+  .formContainer {
+    border-radius: 10px;
+    font-size: medium;
+    font-weight: 300;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 6rem;
+    box-shadow: 3px 2.5px 2px rgba(0, 0, 0, 0.733);
+    background-color: $main-color;
+    color: $main-background-color;
+
+    @include desktop {
+      width: 50rem;
+      height: 40rem;
+    }
+    @include laptop {
+      width: 45rem;
+      height: 40rem;
+    }
+    @include tablet {
+      width: 33rem;
+      height: 40rem;
+    }
+    @include mobile {
+      width: 25rem;
+      height: 40rem;
+    }
+    .inputsContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 2rem;
+      align-items: center;
+      max-width: 100%;
+      width: 28rem;
+      max-height: 100%;
+      height: 40rem;
+
+      @include desktop {
+        width: 28rem;
+        gap: 0.3rem;
+      }
+      @include laptop {
+        width: 24rem;
+        gap: 0.3rem;
+        font-size: $font-size-small;
+      }
+      @include tablet {
+        width: 24rem;
+        font-size: $font-size-small;
+      }
+      @include mobile {
+        width: 22rem;
+        font-size: $font-size-small;
+      }
+      .title {
+        font-size: $font-size-big;
+      }
+    }
+  }
+  .spanAccount {
+    color: $main-color-hover;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .formFooter {
+    font-size: $font-size-normal;
+    @include desktop {
+      font-size: $font-size-normal;
+    }
+    @include laptop {
+      font-size: $font-size-small;
+    }
+    @include tablet {
+      font-size: $font-size-small;
+    }
+    @include mobile {
+      font-size: $font-size-smaller;
+    }
+  }
+}

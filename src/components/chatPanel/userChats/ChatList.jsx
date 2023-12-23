@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../../../firebase";
 import { chatActions } from "../../../store/chatSlice";
+import CardUser from "../../../ui/CardUser";
 
 const ChatList = () => {
   const [chats, setChats] = useState([]);
@@ -42,17 +43,14 @@ const ChatList = () => {
       {sortedChats.map((e, i) => (
         <li
           key={i}
-          className={chatUser.uid === e.userInfo.uid ? "activeChat" : "chat"}
+          className={
+            chatUser.uid === e.userInfo.uid ? "chat activeChat" : "chat"
+          }
           onClick={() => chatHandler(e)}
         >
-          <img src={e.userInfo.photoURL} alt=""></img>
-          <div className="individualChat">
-            <h4>
-              {e.userInfo.displayName[0].toUpperCase() +
-                e.userInfo.displayName.substring(1)}
-            </h4>
-            <p>{e?.lastMessage?.message}</p>
-          </div>
+          <CardUser imgUrl={e.userInfo.photoURL} name={e.userInfo.displayName}>
+            <p className="lastChat">{e?.lastMessage?.message}</p>
+          </CardUser>
         </li>
       ))}
     </ul>

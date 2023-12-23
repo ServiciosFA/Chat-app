@@ -1,0 +1,17 @@
+.labelImage {
+  display: flex;
+  color: var(--primary-color-blue);
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.3rem;
+
+  cursor: pointer;
+  &:hover {
+    color: var(--secondary-color-blue);
+  }
+}
+
+.inputImage {
+  padding: 0.3rem;
+  outline-style: none;
+}

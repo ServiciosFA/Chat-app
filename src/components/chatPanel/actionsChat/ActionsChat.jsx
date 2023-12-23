@@ -2,6 +2,7 @@ import React from "react";
 import "./ActionsChat.scss";
 import { useSelector } from "react-redux";
 import logo from "../../../assets/logo.jpg";
+import Logo from "../../../ui/Logo";
 
 const ActionsChat = () => {
   const userChat = useSelector((state) => state.chat.user);
@@ -14,7 +15,7 @@ const ActionsChat = () => {
             userChat.displayName.substring(1)
           : ""}
       </p>
-      <img className="logo" src={logo} alt=""></img>
+      <Logo logo={logo}></Logo>
     </div>
   );
 };

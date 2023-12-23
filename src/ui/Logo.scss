@@ -1,0 +1,18 @@
+$main-background-color: #0539af;
+$main-color-hover: #01b5e8;
+$main-color: rgb(255, 253, 253);
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  .imageLogo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: scale-down;
+    border: none;
+  }
+  .titleLogo {
+    color: $main-color;
+  }
+}

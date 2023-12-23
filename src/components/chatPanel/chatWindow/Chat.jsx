@@ -1,9 +1,9 @@
 import React from "react";
-import "./ChatWindow.scss";
+import "./Chat.scss";
 import ListChat from "./listChat/ListChat";
 import MessageWindow from "./MessageWindow";
 
-const ChatWindow = () => {
+const Chat = () => {
   return (
     <div className="chatwindowContainer">
       <ListChat></ListChat>
@@ -12,4 +12,4 @@ const ChatWindow = () => {
   );
 };
 
-export default ChatWindow;
+export default Chat;
