@@ -30,7 +30,7 @@ $font-size-small: 1.5rem;
   .userInfo {
     width: 30rem; /* Set a fixed width for the userInfo div */
     max-width: 100%;
-    background-color: red;
+
     @include desktop {
       width: 30rem;
     }

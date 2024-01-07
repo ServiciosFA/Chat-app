@@ -38,6 +38,7 @@ const ChatList = () => {
 
     dispatch(chatActions.CHANGE_USER({ user: e.userInfo, chatId: combinedId }));
   };
+  if (chats?.length === 0) return;
   return (
     <ul className="listContact">
       {sortedChats.map((e, i) => (

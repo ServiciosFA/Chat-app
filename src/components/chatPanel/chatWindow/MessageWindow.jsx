@@ -136,26 +136,26 @@ const MessageWindow = () => {
             disabled={!userChat?.chatId || isLoading}
             className="textChat"
           ></textarea>
-          {img ? (
+          {img && (
             <div className="imageMessageContainer">
               <img src={imgUrl} alt="img" className="imageText"></img>
               <p className="imageDescription">{img.name}</p>
             </div>
-          ) : (
-            <InputFile
-              id="file"
-              name="imageFile"
-              disabled={!userChat?.chatId}
-              fileHandler={fileHandler || isLoading}
-            ></InputFile>
           )}
         </div>
       )}
       <div className="actionButtons">
-        <ImageIcon
-          className="icon"
-          disabled={!userChat?.chatId || isLoading}
-        ></ImageIcon>
+        <InputFile
+          id="file"
+          name="imageFile"
+          disabled={!userChat?.chatId}
+          fileHandler={fileHandler || isLoading}
+        >
+          <ImageIcon
+            className="icon"
+            disabled={!userChat?.chatId || isLoading}
+          ></ImageIcon>
+        </InputFile>
         <Button disabled={!userChat?.chatId || isLoading}>
           {isLoading ? "Loading..." : "Send"}
         </Button>

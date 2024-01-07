@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-
-import { collection, getDocs, query, where } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  orderBy,
+  startAt,
+  endAt,
+} from "firebase/firestore";
 import { db } from "../../../../firebase";
 import "./ContactSearcher.scss";
-import SearchIcon from "@mui/icons-material/Search";
-import FindReplaceIcon from "@mui/icons-material/FindReplace";
 import FindedUser from "./FindedUser";
 import Spinner from "../../../../ui/Spinner";
 import InputField from "../../../../ui/InputField";
@@ -15,21 +19,24 @@ const ContactSearcher = () => {
   const [error, setError] = useState(false);
   const [loadingSearch, setLoading] = useState(false);
 
-  //Evento al presionar ENTER
+  // Evento al presionar ENTER
   const handlerKey = (e) => {
     e.code === "Enter" && searchHandler();
   };
-  //Buscar usuarios registrados en FAchat
 
-  const searchHandler = async (e) => {
-    //consulta a users para buscar por nombre
+  // Función para realizar una búsqueda insensible a mayúsculas y minúsculas
+  const caseInsensitiveSearch = (value) => value.toLowerCase();
+
+  // Buscar usuarios registrados en FAchat
+  const searchHandler = async () => {
     const userFound = query(
       collection(db, "users"),
-      where("displayName", "==", userName)
+      orderBy("displayName"),
+      startAt(caseInsensitiveSearch(userName)),
+      endAt(caseInsensitiveSearch(userName) + "\uf8ff")
     );
     try {
       setLoading(true);
-      //Obtener usuario encontrado segun la consulta
       const querySnapshot = await getDocs(userFound);
       if (querySnapshot.empty) setUser(null);
       else {
@@ -44,11 +51,12 @@ const ContactSearcher = () => {
     }
   };
 
-  //refresh states
+  // Refresh states
   const refreshHandler = () => {
     setUser(null);
-    setUserName(null);
+    setUserName("");
   };
+
   if (loadingSearch) return <Spinner type={"spinner small"}></Spinner>;
 
   return (
@@ -56,9 +64,10 @@ const ContactSearcher = () => {
       <div className="searcherInput">
         <InputField
           type="text"
-          placeholder="Find contact"
+          placeholder="Buscar contacto"
           onKeyDown={handlerKey}
           onChange={(e) => setUserName(e.target.value)}
+          value={userName}
           id="searcher"
         ></InputField>
       </div>
