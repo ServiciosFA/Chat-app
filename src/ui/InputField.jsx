@@ -31,7 +31,7 @@ const InputField = ({
         onKeyDown={onKeyDown}
         required
       ></input>
-      {hasError && <label className="label error">{errorMessage}</label>}
+      {hasError && <label className="error label">{errorMessage}</label>}
     </div>
   );
 };
