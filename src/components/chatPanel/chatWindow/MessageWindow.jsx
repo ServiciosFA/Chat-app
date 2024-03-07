@@ -33,7 +33,8 @@ const MessageWindow = () => {
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && !event.shiftKey) {
       event.preventDefault();
-      textHandler(event);
+      if (userChat?.chatId && !isLoading && (message || img))
+        textHandler(event);
     }
   };
 
@@ -156,7 +157,7 @@ const MessageWindow = () => {
             disabled={!userChat?.chatId || isLoading}
           ></ImageIcon>
         </InputFile>
-        <Button disabled={!userChat?.chatId || isLoading}>
+        <Button disabled={!userChat?.chatId || isLoading || (!message && !img)}>
           {isLoading ? "Loading..." : "Send"}
         </Button>
       </div>

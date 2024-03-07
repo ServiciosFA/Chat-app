@@ -15,6 +15,7 @@ $font-size-bigger: 10rem;
   grid-template-rows: 7rem 40rem;
   align-content: center;
   box-shadow: rgba(51, 51, 51, 0.527) 0px 2px 8px 0px;
+ 
 
   @include desktop {
     grid-template-columns: minmax(30rem, 40rem) minmax(40rem, 65rem);

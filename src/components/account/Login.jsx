@@ -7,8 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { authActions } from "../../store/authSlice";
 import { useDispatch } from "react-redux";
 import useForm from "../../hooks/useForm";
-import InputField from "../../ui/InputField";
+
 import FormCard from "../../ui/FormCard";
+import InputField from "../../ui/InputField";
 
 const greaterThanFive = (value) => value && value.trim().length > 5;
 const isEmail = (value) => value && value.includes("@");
@@ -21,7 +22,7 @@ const Login = (props) => {
     hasError: emailHasError,
     valueChangeHandler: emailChangeHandler,
     inputBlurHandler: emailBlurHandler,
-    reset: resetEmail,
+    // reset: resetEmail,
   } = useForm(isEmail);
   const {
     value: password,
@@ -29,7 +30,7 @@ const Login = (props) => {
     hasError: passwordHasError,
     valueChangeHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
-    reset: resetPassword,
+    //  reset: resetPassword,
   } = useForm(greaterThanFive);
 
   const dispatch = useDispatch();

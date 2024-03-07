@@ -47,8 +47,9 @@ $font-size-big: 2.2rem;
     .lastChat {
       padding: 1rem 0 0 1rem;
       font-size: small;
-      overflow-x: hidden;
-      text-wrap: nowrap;
+      white-space: nowrap; /* Evitar que el texto se desborde a una nueva línea */
+      overflow: hidden; /* Ocultar el texto que desborde */
+      text-overflow: ellipsis; /* Mostrar los tres puntos (...) al final del texto truncado */
       width: 30rem;
       @include desktop {
         width: 30rem;
@@ -57,10 +58,10 @@ $font-size-big: 2.2rem;
         width: 22rem;
       }
       @include tablet {
-        width: 20rem;
+        width: 22rem;
       }
       @include mobile {
-        width: 20rem;
+        width: 15rem;
       }
     }
   }
