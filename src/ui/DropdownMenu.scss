@@ -1,3 +1,4 @@
+@import "../styles/mixins.scss";
 $main-color: #0538afda;
 $main-color-hover: #01b5e8;
 $main-background-color: rgb(255, 253, 253);
@@ -8,7 +9,6 @@ $font-size-normal: 1.8rem;
   background-color: $main-color;
   color: $font-color;
   position: absolute;
-  z-index: 100;
   bottom: 0;
   right: 0;
   transform: translate(75%, 100%);
@@ -16,10 +16,24 @@ $font-size-normal: 1.8rem;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
-  z-index: 100;
+  z-index: 101;
   font-size: $font-size-normal;
   padding: 1rem;
   border: 1px solid $main-background-color;
+  @include desktop {
+  }
+  @include laptop {
+  }
+  @include tablet {
+    left: 0;
+    right: auto;
+    bottom: 0;
+  }
+  @include mobile {
+    left: 0;
+    right: auto;
+    bottom: 0;
+  }
 }
 .optionLink {
   margin: 0.2rem;

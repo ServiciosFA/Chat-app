@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  collection,
-  getDocs,
-  query,
-  orderBy,
-  startAt,
-  endAt,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../../firebase";
 import "./ContactSearcher.scss";
 import FindedUser from "./FindedUser";
@@ -31,10 +24,9 @@ const ContactSearcher = () => {
   const searchHandler = async () => {
     const userFound = query(
       collection(db, "users"),
-      orderBy("displayName"),
-      startAt(caseInsensitiveSearch(userName)),
-      endAt(caseInsensitiveSearch(userName) + "\uf8ff")
+      where("displayName", "==", userName)
     );
+
     try {
       setLoading(true);
       const querySnapshot = await getDocs(userFound);

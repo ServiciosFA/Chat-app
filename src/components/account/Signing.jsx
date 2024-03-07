@@ -174,8 +174,14 @@ const Signing = () => {
       ></InputField>
       <div className="imageLayout">
         <InputFile name="avatar" id="file" fileHandler={fileHandler}>
-          <PhotoSizeSelectActualOutlinedIcon></PhotoSizeSelectActualOutlinedIcon>
-          <span>{!file ? "Add Avatar" : `Name: ${file.name}`}</span>
+          {!imgUrl ? (
+            <PhotoSizeSelectActualOutlinedIcon></PhotoSizeSelectActualOutlinedIcon>
+          ) : (
+            <img className="imageRegister" src={imgUrl} alt=""></img>
+          )}
+          <span className="nameFile">
+            {!file ? "Add Avatar" : `${file.name}`}
+          </span>
         </InputFile>
       </div>
     </FormCard>

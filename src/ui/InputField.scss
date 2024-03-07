@@ -48,9 +48,11 @@ $input-background-color-error: #f8babe;
   }
   @include tablet {
     font-size: $font-size-small;
+    width: 20rem;
   }
   @include mobile {
     font-size: $font-size-smaller;
+    width: 15rem;
   }
 }
 .input.error {

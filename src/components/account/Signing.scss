@@ -12,6 +12,7 @@ $font-size-big: 2.2rem;
   outline-style: none;
   font-size: $font-size-normal;
   font-weight: 500;
+
   @include desktop {
   }
   @include laptop {
@@ -22,5 +23,16 @@ $font-size-big: 2.2rem;
   }
   @include mobile {
     font-size: $font-size-small;
+  }
+  .imageRegister {
+    width: 55px;
+    height: 55px;
+  }
+  .nameFile {
+    overflow: hidden;
+    max-width: 15rem;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    padding-left: 0.5rem;
   }
 }
