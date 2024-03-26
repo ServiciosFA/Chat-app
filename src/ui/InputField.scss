@@ -6,6 +6,7 @@ $main-placeholder-color: rgb(190, 187, 187);
 $font-size-smaller: 1rem;
 $font-size-small: 1.2rem;
 $font-size-normal: 1.5rem;
+$font-size-large: 2rem;
 $font-size-big: 2.2rem;
 $input-color-error: #f82331;
 $input-background-color-error: #f8babe;
@@ -13,7 +14,9 @@ $input-background-color-error: #f8babe;
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
-
+  padding: 0.5rem 0 0.5rem 0;
+  justify-content: center;
+  align-items: center;
   width: 100%;
 }
 .label {
@@ -38,13 +41,17 @@ $input-background-color-error: #f8babe;
   background-color: $main-backgorund-color;
   color: $main-font-color;
   outline-style: none;
+  font-size: $font-size-large;
   &::placeholder {
     color: $main-placeholder-color;
   }
   @include desktop {
+    font-size: $font-size-normal;
+    width: 25rem;
   }
   @include laptop {
-    font-size: $font-size-small;
+    width: 25rem;
+    font-size: $font-size-normal;
   }
   @include tablet {
     font-size: $font-size-small;

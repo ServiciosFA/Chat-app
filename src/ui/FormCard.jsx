@@ -24,8 +24,8 @@ const FormCard = ({
   return (
     <div className="accountPanelContainer">
       <form className="formContainer" onSubmit={submitHandler}>
+        <h3 className="title">{title}</h3>
         <div className="inputsContainer">
-          <h3 className="title">{title}</h3>
           {children}
           {buttonRender}
         </div>

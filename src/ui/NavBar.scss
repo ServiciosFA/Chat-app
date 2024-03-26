@@ -53,6 +53,17 @@ $font-size-normal: 1.8rem;
     .link {
       font-size: 2rem;
       font-weight: 500;
+      @include laptop {
+        font-size: 2rem;
+        font-weight: 500;
+      }
+      @include tablet {
+        font-size: 1.8rem;
+        font-weight: 500;
+      }
+      @include mobile {
+        display: none;
+      }
       &:hover {
         color: $main-color-hover;
       }

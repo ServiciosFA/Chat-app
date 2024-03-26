@@ -15,11 +15,6 @@ const InputField = ({
 }) => {
   return (
     <div className="inputContainer">
-      {label && (
-        <label className="label" htmlFor={id}>
-          {placeholder}
-        </label>
-      )}
       <input
         id={id}
         className={hasError ? "input error " : "input"}
